@@ -92,7 +92,7 @@ def gridsample(source, field, padding_mode):
     if source.shape[2] != source.shape[3]:
         raise NotImplementedError('Grid sample is not impolemented for non-square tensors.')
     scaled_field = field * source.shape[2] / (source.shape[2] - 1)
-    return torch.nn.functional.grid_sample(source, scaled_field, mode="bilinear",
+    return torch.nn.functional.grid_sample(source.float(), scaled_field.float(), mode="bilinear",
                                             padding_mode=padding_mode)
 
 def get_identity_grid(size, device='cuda'):
